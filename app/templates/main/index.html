@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<h2 class="h4 mb-4">Bienvenido a la biblioteca</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card tarjeta-estadistica shadow-sm"><div class="card-body">
+            <h3 class="h6 text-muted">Libros registrados</h3>
+            <p class="display-6 m-0">{{ estadisticas.libros }}</p>
+        </div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card tarjeta-estadistica shadow-sm"><div class="card-body">
+            <h3 class="h6 text-muted">Categorías</h3>
+            <p class="display-6 m-0">{{ estadisticas.categorias }}</p>
+        </div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card tarjeta-estadistica shadow-sm"><div class="card-body">
+            <h3 class="h6 text-muted">Usuarios</h3>
+            <p class="display-6 m-0">{{ estadisticas.usuarios }}</p>
+        </div></div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h3 class="h5 m-0">Últimos libros agregados</h3>
+    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('libros.lista') }}">Ver todos</a>
+</div>
+
+{% if libros_recientes %}
+<div class="list-group shadow-sm">
+    {% for libro in libros_recientes %}
+    <div class="list-group-item">
+        <div class="d-flex justify-content-between">
+            <strong>{{ libro.titulo }}</strong>
+            <span class="badge bg-secondary">{{ libro.categoria.nombre }}</span>
+        </div>
+        <small class="text-muted">{{ libro.autor }} · {{ libro.anio }} · Registrado por {{ libro.registrado_por.nombre }}</small>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">Todavía no hay libros registrados.</p>
+{% endif %}
+{% endblock %}

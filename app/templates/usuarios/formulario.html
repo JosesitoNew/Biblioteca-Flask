@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if usuario else 'Nuevo' }} usuario{% endblock %}
+{% block contenido %}
+<h2 class="h4 mb-3">{{ 'Editar usuario' if usuario else 'Registrar nuevo usuario' }}</h2>
+<form method="post" class="card card-body shadow-sm" style="max-width: 600px;">
+    <div class="mb-3">
+        <label class="form-label" for="nombre">Nombre completo</label>
+        <input class="form-control" id="nombre" name="nombre" value="{{ valores.nombre }}" required maxlength="100">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="username">Nombre de usuario</label>
+        <input class="form-control" id="username" name="username" value="{{ valores.username }}" required maxlength="50">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="email">Correo electrónico</label>
+        <input class="form-control" type="email" id="email" name="email" value="{{ valores.email }}" required maxlength="120">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="rol">Rol</label>
+        <select class="form-select" id="rol" name="rol">
+            <option value="usuario" {% if valores.rol == 'usuario' %}selected{% endif %}>Usuario</option>
+            <option value="admin" {% if valores.rol == 'admin' %}selected{% endif %}>Administrador</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="password">Contraseña {% if usuario %}<small class="text-muted">(dejar vacío para no cambiarla)</small>{% endif %}</label>
+        <input class="form-control" type="password" id="password" name="password" {% if not usuario %}required{% endif %} minlength="6">
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('usuarios.lista') }}">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

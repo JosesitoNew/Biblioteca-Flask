@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block titulo %}Página no encontrada{% endblock %}
+{% block contenido %}
+<div class="text-center py-5">
+    <h2 class="display-6">404 · Página no encontrada</h2>
+    <p class="text-muted">La página que busca no existe.</p>
+    <a class="btn btn-primary" href="{{ url_for('main.index') }}">Volver al inicio</a>
+</div>
+{% endblock %}
